@@ -26,7 +26,8 @@ SECRET_KEY = '3h7(b24ejykuoc8i5j+fy4e56r7s*i4%bet--50rs5*on90-mg'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'EduSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
