@@ -34,20 +34,30 @@ class Teacher (models.Model):
         return self.username
 
 class Exercise (models.Model):
+    name=models.CharField(max_length=50)
     timelimit=models.DateField()
     teacher=models.ForeignKey(Teacher,on_delete=models.CASCADE)
     caption=models.CharField(max_length=255)
     file=forms.FileField()
+    def __str__(self):
+        return self.name
 
 class Video (models.Model):
+    name=models.CharField(max_length=50)
     timeuploded=models.DateField(default=datetime.now())
     teacher=models.ForeignKey(Teacher,on_delete=models.CASCADE)
     caption=models.CharField(max_length=255)
     file=forms.FileField()
+    def __str__(self):
+        return self.name
 
 class Answer (models.Model):
+    name=models.CharField(max_length=50)
     time=models.DateTimeField("Time submited",default=datetime.now())
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
     caption=models.CharField(max_length=255)
+    mark=models.CharField(max_length=3,blank=True)
     file=forms.FileField()
+    def __str__(self):
+        return self.name
 
