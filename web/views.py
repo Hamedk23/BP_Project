@@ -9,14 +9,15 @@ from .forms import *
 
 def indexView(request):
     return render(request,'index.html')
+
 @login_required()
-@permission_required('is_staff')
+@permission_required("is_staff")
 def dashboardView(request):
-    return render(request,'tchpanel.html')
+    return redirect("teacher/")
 
 @login_required()
 def dashboardView(request):
-    return render(request,'stdpanel.html')
+    return redirect("student/")
 
 def registerView(request):
     if request.method == "POST":
@@ -46,6 +47,26 @@ def answers(request,*args,**kwargs):
 
     return render(request,"answers.html",context)
 
+def tchvideo(request,*arrgs,**kwarrgs):
+
+    context={}
+    return render(request,"tchvideo.html",context)
+
+def tchexercise(request,*arrgs,**kwarrgs):
+
+    context={}
+    return render(request,"tchexercise.html",context)
+
+def stdvideo(request,*arrgs,**kwarrgs):
+
+    context={}
+    return render(request,"stdvideo.html",context)
+
+def stdexercise(request,*arrgs,**kwarrgs):
+
+    context={}
+    return render(request,"stdexercise.html",context)
+
 def sendanswer (request,*args,**kwargs):
     if request.method=="POST":
         new_form= getanswer(request.POST ,request.FILES)
@@ -61,4 +82,3 @@ def sendanswer (request,*args,**kwargs):
         "form": new_form
     }
     return render(request,"sendanswer.html",data)
-
