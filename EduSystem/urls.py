@@ -15,14 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.contrib.auth.views import LoginView,LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from web.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('student/',student),
-    path('teacher/',teacher),
-    path('student/sendexercise/',sendexercise ),
+    path('',indexView,name="home"),
+    path('accounts/',indexView,name="home"),
+    path('accounts/dashboard/',dashboardView,name="dashboard"),
+    path('accounts/login/',LoginView.as_view(),name="login_url"),
+    path('accounts/register/',registerView,name="register_url"),
+    path('accounts/logout/',LogoutView.as_view(next_page='dashboard'),name="logout"),
+    path('accounts/dashboard/student/',student),
+    path('accounts/dashboard/teacher/',teacher),
+    path('accounts/dashboard/student/sendanswer/',sendanswer),
+    path('accounts/dashboard/student/answers/',answers),
     path('', TemplateView.as_view(template_name='home.html'),name='home' ),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

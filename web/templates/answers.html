@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fa" dir="ltr">
+    <head>
+        <style media="screen">
+        table{
+            margin: auto;
+        }
+        table, th, td {
+            padding: 10px 40px 10px 20px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <table class="table" dir="rtl">
+            <thead>
+                <tr>
+                    <th>نام تمرین</th>
+                    <th>تاریخ آخرین ارسال</th>
+                    <th>ارسال پاسخ</th>
+                    <th>نمره ثبت شده</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for answer in answers %}
+                    <tr>
+                        <td>{{answer.name}}</td>
+                        <td>{{answer.time}}</td>
+                        <td>
+                            {% if answer.pdffile %}
+                                <a href="{{answers.pdffile.url}}" class="btn btn-primary" target="_blank">
+                                    Download Youranswer
+                                </a>
+                            {% else %}
+                                <a href="sendanswer.html" class="btn btn-primary">
+                                    Upload Now
+                                </a>
+                            {% endif %}
+                        </td>
+                        
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
